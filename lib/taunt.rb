@@ -7,24 +7,22 @@ class Taunt
   
   def taunt!
     taunt = @taunts[rand(@taunts.length)]
-    unless darwin?
-      puts "only do OS X so far sorry :("
-      exit 1
-    end
-      
     unless taunt
       puts "you need to put some taunt sounds in #{@taunt_home}"
       exit 1
     end
     process = fork do
-      `afplay #{taunt} &`
+      Process.daemon
+      `#{play_command} #{taunt} &`
     end
     Process.detach(process)
   end
   
   private
-  def darwin?
-    RUBY_PLATFORM =~ /darwin/
+  def play_command
+    %w{afplay aplay}.each {|command|
+      return command if system("which #{command}")
+    }
   end
   
   def supported_formats
