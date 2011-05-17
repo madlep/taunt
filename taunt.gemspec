@@ -31,7 +31,8 @@ Gem::Specification.new do |s|
     "bin/taunt",
     "lib/taunt.rb",
     "spec/spec_helper.rb",
-    "spec/taunt_spec.rb"
+    "spec/taunt_spec.rb",
+    "taunt.gemspec"
   ]
   s.homepage = %q{http://github.com/madlep/taunt}
   s.licenses = ["MIT"]
